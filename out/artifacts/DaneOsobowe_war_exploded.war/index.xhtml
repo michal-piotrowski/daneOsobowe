@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      <h:head>
+
+      </h:head>
+      <h:body>
+               <h:form>
+                  Name: <h:inputText id="name" value="#{pData.name}"/>
+                  Surname*: <h:inputText id="surname" value="#{pData.surname}" required="true"
+                                         requiredMessage="surnameEmpty"/><h:message for="surname" style="color:red" /><br/>
+                  Age *: <h:inputText id="age" value="#{pData.age}" required="true" requiredMessage="Age must be between 0 and 120">
+                  <f:validateLongRange minimum="0" maximum="120"/>
+                  </h:inputText><h:message for="age" style="color:red"/><br/>
+                  Sex: <h:selectOneRadio value="#{pData.sex}">
+                  <f:selectItem itemValue="male" itemLabel="Male" />
+                  <f:selectItem itemValue="female" itemLabel="Female" />
+                  </h:selectOneRadio>
+                  Voivodeship: <h:selectOneMenu value="#{pData.voivodeship}">
+                  <f:selectItem itemValue = "0" itemLabel = "--none--"  />
+                  <f:selectItem itemValue = "malopolskie" itemLabel = "Małopolskie"/>
+                  <f:selectItem itemValue = "mazowieckie" itemLabel = "Mazowieckie"/>
+                  <f:selectItem itemValue = "podlaskie" itemLabel = "Podlaskie"/>
+                  <f:selectItem itemValue = "podkarpackie" itemLabel = "Podkarpackie"/>
+                  <f:selectItem itemValue = "pomorskie" itemLabel = "Pomorskie"/>
+                  <f:ajax execute="@this" event="change" render="button1" listener="#{v.voivodeshipSelected}"/>
+
+                  </h:selectOneMenu>
+                  <br/>
+               <h:commandButton  value="submit" action='validate' id="button1"/> <!--disabled='#{!(v.selected)}'-->
+               </h:form>
+      </h:body>
+</html>
